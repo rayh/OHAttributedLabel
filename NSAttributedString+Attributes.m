@@ -147,6 +147,32 @@
 	} while(startPoint<NSMaxRange(range));
 }
 
+-(void)setTextItalic:(BOOL)isItalic range:(NSRange)range {
+    NSUInteger startPoint = range.location;
+	NSRange effectiveRange;
+	do {
+		// Get font at startPoint
+		CTFontRef currentFont = (CTFontRef)[self attribute:(NSString*)kCTFontAttributeName atIndex:startPoint effectiveRange:&effectiveRange];
+		// The range for which this font is effective
+		NSRange fontRange = NSIntersectionRange(range, effectiveRange);
+		// Create bold/unbold font variant for this font and apply
+		CTFontRef newFont = CTFontCreateCopyWithSymbolicTraits(currentFont, 0.0, NULL, (isItalic?kCTFontItalicTrait:0), kCTFontItalicTrait);
+		if (newFont) {
+			[self removeAttribute:(NSString*)kCTFontAttributeName range:fontRange]; // Work around for Apple leak
+			[self addAttribute:(NSString*)kCTFontAttributeName value:(id)newFont range:fontRange];
+			CFRelease(newFont);
+		} else {
+			NSString* fontName = [(NSString*)CTFontCopyFullName(currentFont) autorelease];
+			NSLog(@"[OHAttributedLabel] Warning: can't find a italic font variant for font %@. Try another font family (like Helvetica) instead.",fontName);
+		}
+		////[self removeAttribute:(NSString*)kCTFontWeightTrait range:fontRange]; // Work around for Apple leak
+		////[self addAttribute:(NSString*)kCTFontWeightTrait value:(id)[NSNumber numberWithInt:1.0f] range:fontRange];
+		
+		// If the fontRange was not covering the whole range, continue with next run
+		startPoint = NSMaxRange(effectiveRange);
+	} while(startPoint<NSMaxRange(range));
+}
+
 -(void)setTextAlignment:(CTTextAlignment)alignment lineBreakMode:(CTLineBreakMode)lineBreakMode {
 	[self setTextAlignment:alignment lineBreakMode:lineBreakMode range:NSMakeRange(0,[self length])];
 }
