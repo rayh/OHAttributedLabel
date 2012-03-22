@@ -162,6 +162,48 @@
 	CFRelease(aStyle);
 }
 
+-(void)setLineSpacing:(CGFloat)lineSpacing
+{
+    CTParagraphStyleSetting paraStyles[3] = 
+    {
+		{.spec = kCTParagraphStyleSpecifierLineSpacing, .valueSize = sizeof(CGFloat), .value = (const void*)&lineSpacing},
+		{.spec = kCTParagraphStyleSpecifierMaximumLineSpacing, .valueSize = sizeof(CGFloat), .value = (const void*)&lineSpacing},
+		{.spec = kCTParagraphStyleSpecifierMinimumLineSpacing, .valueSize = sizeof(CGFloat), .value = (const void*)&lineSpacing},
+	};
+	CTParagraphStyleRef aStyle = CTParagraphStyleCreate(paraStyles, 3);
+    
+    [self removeAttribute:(NSString*)kCTParagraphStyleAttributeName range:NSMakeRange(0, [self length])];
+	[self addAttribute:(NSString*)kCTParagraphStyleAttributeName value:(id)aStyle range:NSMakeRange(0, [self length])];
+	CFRelease(aStyle);
+}
+
+-(void)setLineHeight:(CGFloat)lineHeight
+{
+    CTParagraphStyleSetting paraStyles[2] = 
+    {
+		{.spec = kCTParagraphStyleSpecifierMinimumLineHeight, .valueSize = sizeof(CGFloat), .value = (const void*)&lineHeight},
+		{.spec = kCTParagraphStyleSpecifierMaximumLineHeight, .valueSize = sizeof(CGFloat), .value = (const void*)&lineHeight},
+	};
+	CTParagraphStyleRef aStyle = CTParagraphStyleCreate(paraStyles, 2);
+    
+    [self removeAttribute:(NSString*)kCTParagraphStyleAttributeName range:NSMakeRange(0, [self length])];
+	[self addAttribute:(NSString*)kCTParagraphStyleAttributeName value:(id)aStyle range:NSMakeRange(0, [self length])];
+	CFRelease(aStyle);
+}
+
+-(void)setParagraphTopSpacing:(CGFloat)spacing
+{
+    CTParagraphStyleSetting paraStyles[2] = 
+    {
+        {.spec = kCTParagraphStyleSpecifierParagraphSpacingBefore, .valueSize = sizeof(CGFloat), .value = (const void*)&spacing},
+    };
+	CTParagraphStyleRef aStyle = CTParagraphStyleCreate(paraStyles, 1);
+    
+    [self removeAttribute:(NSString*)kCTParagraphStyleAttributeName range:NSMakeRange(0, [self length])];
+	[self addAttribute:(NSString*)kCTParagraphStyleAttributeName value:(id)aStyle range:NSMakeRange(0, [self length])];
+	CFRelease(aStyle);
+}
+
 @end
 
 

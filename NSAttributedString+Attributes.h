@@ -73,6 +73,11 @@
 
 -(void)setTextAlignment:(CTTextAlignment)alignment lineBreakMode:(CTLineBreakMode)lineBreakMode;
 -(void)setTextAlignment:(CTTextAlignment)alignment lineBreakMode:(CTLineBreakMode)lineBreakMode range:(NSRange)range;
+
+-(void)setLineSpacing:(CGFloat)lineSpacing;
+-(void)setLineHeight:(CGFloat)lineHeight;
+-(void)setParagraphTopSpacing:(CGFloat)spacing;
+
 @end
 
 

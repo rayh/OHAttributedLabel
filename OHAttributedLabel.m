@@ -33,7 +33,7 @@
 #import "OHAttributedLabel.h"
 #import "NSAttributedString+Attributes.h"
 
-#define OHAttributedLabel_WarnAboutKnownIssues 1
+#define OHAttributedLabel_WarnAboutKnownIssues 0
 
 /////////////////////////////////////////////////////////////////////////////
 // MARK: Private Utility methods
@@ -171,9 +171,9 @@ BOOL CTRunContainsCharactersFromStringRange(CTRunRef run, NSRange range) {
 - (void)commonInit
 {
 	customLinks = [[NSMutableArray alloc] init];
-	self.linkColor = [UIColor blueColor];
+	self.linkColor = [UIColor blackColor];
 	self.highlightedLinkColor = [UIColor colorWithWhite:0.4 alpha:0.3];
-	self.underlineLinks = YES;
+	self.underlineLinks = NO;
 	self.automaticallyAddLinksForType = NSTextCheckingTypeLink;
 	if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"tel:0"]]) {
 		self.automaticallyAddLinksForType |= NSTextCheckingTypePhoneNumber;
