@@ -1,0 +1,17 @@
+Vendor::Spec.new do |s|
+
+  s.name         "OHAttributedLabel"
+  s.version      "0.2"
+
+  s.authors      "Ray Hilton"
+  s.email        "ray@wirestorm.net"
+  s.description  "UILabel that supports NSAttributedString"
+
+  s.homepage     "https://github.com/rayh/OHAttributedLabel"
+  s.source       "https://rayh@github.com/rayh/OHAttributedLabel.git"
+
+  s.files        ['OHAttributedLabel.h','OHAttributedLabel.m', 'NSAttributedString+Attributes.h', 'NSAttributedString+Attributes.m']
+
+  s.framework	 'CoreText.framework'
+
+end
