@@ -59,7 +59,7 @@
 
 	// now we only change the color of "Hello"
 	[attrStr setTextColor:[UIColor colorWithRed:0.f green:0.f blue:0.5 alpha:1.f] range:[txt rangeOfString:@TXT_BOLD]];
-	[attrStr setTextBold:YES range:[txt rangeOfString:@TXT_BOLD]];
+	[attrStr setTextItalic:YES range:[txt rangeOfString:@TXT_BOLD]];
 	
 	/**(2)** Affect the NSAttributedString to the OHAttributedLabel *******/
 	label1.attributedText = attrStr;
